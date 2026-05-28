@@ -8,7 +8,7 @@ const SOCIALS = [
     icon: <ExternalLink size={20} />,
     label: "LinkedIn",
     value: "shirshak-mondal",
-    href: "https://linkedin.com/in/shirshak-mondal",
+    href: "https://www.linkedin.com/in/shirshak-mondal-15260a291",
     color: "#0077b5",
   },
   {

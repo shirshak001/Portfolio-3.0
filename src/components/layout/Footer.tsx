@@ -20,7 +20,7 @@ const SOCIALS = [
   },
   {
     icon: <ExternalLink size={16} />,
-    href: "https://linkedin.com/in/shirshak-mondal",
+    href: "https://www.linkedin.com/in/shirshak-mondal-15260a291",
     label: "LinkedIn",
   },
   {

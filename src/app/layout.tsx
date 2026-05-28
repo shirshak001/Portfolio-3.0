@@ -7,6 +7,7 @@ import CursorEffect from "@/components/ui/CursorEffect";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Loader from "@/components/ui/Loader";
 import BackgroundFX from "@/components/ui/BackgroundFX";
+import ParallaxBG from "@/components/ui/ParallaxBG";
 
 export const metadata: Metadata = {
   title: "Shirshak Mondal — UI/UX Designer & Developer",
@@ -64,13 +65,24 @@ export default function RootLayout({
         />
       </head>
       <body className="noise-overlay">
+        {/* Fixed background layers — z:0 */}
         <BackgroundFX />
+        <ParallaxBG />
+        {/* App chrome — z:1+ */}
         <Loader />
         <SmoothScroll />
         <CursorEffect />
         <ScrollProgress />
         <Navbar />
-        <main style={{ position: "relative", zIndex: 1 }}>{children}</main>
+        <main
+          style={{
+            position: "relative",
+            zIndex: 1,
+            animation: "pageEnter 0.55s cubic-bezier(0.22,1,0.36,1) both",
+          }}
+        >
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

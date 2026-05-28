@@ -86,6 +86,12 @@ body {
   overflow-x: hidden;
 }
 
+/* All page sections use semi-transparent bg so canvas shows through */
+section {
+  position: relative;
+  z-index: 1;
+}
+
 ::selection {
   background: rgba(108, 99, 255, 0.3);
   color: var(--text-primary);

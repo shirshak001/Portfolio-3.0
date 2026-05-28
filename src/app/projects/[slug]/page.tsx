@@ -1,10 +1,9 @@
-// Server component — only exports generateStaticParams and renders the client component
 import CaseStudyClient from "./CaseStudyClient";
 
-const SLUGS = ["soilsaathi", "credmate", "layerforge", "safety-band"];
+const SLUGS = ["soilsaathi", "credmate", "polygov", "safety-band", "gymflex", "attendease", "layerforge"];
 
 export function generateStaticParams() {
-  return SLUGS.map((slug) => ({ slug }));
+  return SLUGS.map(slug => ({ slug }));
 }
 
 export default function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {

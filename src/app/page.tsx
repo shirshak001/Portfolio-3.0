@@ -90,21 +90,42 @@ export default function HomePage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)" }}>
       <style>{`
+        /* ── GLOBAL ── */
+        *, *::before, *::after { box-sizing: border-box; }
+        body { overflow-x: hidden; }
+
         /* ── HERO LAYOUT ── */
         .hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center; }
         @media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } .hero-right { display: none !important; } }
 
+        /* ── HERO SECTION PADDING ── */
+        .hero-section { padding: 8rem 1.5rem 4rem !important; }
+        @media (max-width: 480px) { .hero-section { padding: 7rem 1.25rem 3rem !important; } }
+
+        /* ── HERO STATUS BADGE ── */
+        .hero-badge { max-width: 100%; overflow: hidden; }
+        .hero-badge span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        @media (max-width: 400px) { .hero-badge span { font-size: 0.58rem !important; } }
+
+        /* ── HERO HEADLINE ── */
+        .hero-h1 { font-size: clamp(1.7rem, 8.5vw, 4.5rem) !important; word-break: break-word; }
+        @media (max-width: 400px) { .hero-h1 { font-size: 1.6rem !important; } }
+
+        /* ── INFO CHIPS ── */
+        .hero-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
         /* ── HERO CTA ROW ── */
         .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
         @media (max-width: 480px) {
-          .hero-cta { display: grid; grid-template-columns: 1fr 1fr; }
+          .hero-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width: 100%; }
           .hero-cta-full { grid-column: span 2; }
+          .hero-cta a, .hero-cta a[href] { width: 100%; }
         }
 
         /* ── PROJECTS GRID ── */
         .proj-hero-row { height: 400px; }
         .proj-small-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-        @media (max-width: 900px) { .proj-small-row { grid-template-columns: 1fr; } .proj-hero-row { height: 280px; } }
+        @media (max-width: 900px) { .proj-small-row { grid-template-columns: 1fr; } .proj-hero-row { height: 260px; } }
 
         /* ── STATS ── */
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
@@ -119,22 +140,24 @@ export default function HomePage() {
         .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         @media (max-width: 640px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
 
-        /* ── ABOUT SPLIT ── */
-        .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        @media (max-width: 768px) { .about-split { grid-template-columns: 1fr; gap: 2rem; } }
+        /* ── SECTION PADDING ── */
+        @media (max-width: 480px) {
+          section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+        }
       `}</style>
 
       {/* ═══════ HERO ═══════ */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "8rem 2rem 4rem", maxWidth: "1280px", margin: "0 auto", position: "relative" }}>
+      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "8rem 2rem 4rem", maxWidth: "1280px", margin: "0 auto", position: "relative", overflow: "hidden" }}>
 
         <div className="hero-grid" style={{ width: "100%" }}>
           {/* ── LEFT ── */}
           <div>
             {/* Status */}
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-              style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.3rem 0.875rem", borderRadius: "9999px", border: "1px solid var(--border)", background: "var(--bg-secondary)", marginBottom: "1.75rem" }}>
+              className="hero-badge"
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.3rem 0.875rem", borderRadius: "9999px", border: "1px solid var(--border)", background: "var(--bg-secondary)", marginBottom: "1.5rem", maxWidth: "100%" }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent-green)", boxShadow: "0 0 8px var(--accent-green)", flexShrink: 0 }} />
-              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem", color: "var(--text-secondary)", letterSpacing: "0.06em" }}>
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.63rem", color: "var(--text-secondary)", letterSpacing: "0.04em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 Available for internships & opportunities
               </span>
             </motion.div>
@@ -147,38 +170,38 @@ export default function HomePage() {
 
             {/* Headline */}
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1.08, letterSpacing: "-0.03em", marginBottom: "0.5rem" }}>
-              I design experiences
-              <br />
-              people <span style={{ color: "var(--accent)" }}>actually</span> love.
+              className="hero-h1"
+              style={{ fontFamily: "Syne, sans-serif", fontSize: "clamp(1.7rem, 8.5vw, 4.5rem)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "0.5rem", wordBreak: "break-word" }}>
+              I design experiences people{" "}
+              <span style={{ color: "var(--accent)" }}>actually</span> love.
             </motion.h1>
 
             {/* Role cycler */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-              style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1.75rem", height: "2rem", overflow: "hidden" }}>
-              <span style={{ width: 20, height: 1, background: "var(--border)" }} />
-              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem", fontWeight: 500, minWidth: "160px" }}>
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem", minHeight: "1.8rem", overflow: "hidden" }}>
+              <span style={{ width: 16, height: 1, background: "var(--border)", flexShrink: 0 }} />
+              <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.75rem", fontWeight: 500 }}>
                 <RoleCycler />
               </span>
             </motion.div>
 
             {/* Description */}
             <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
-              style={{ fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.8, maxWidth: "480px", marginBottom: "2rem" }}>
+              style={{ fontSize: "clamp(0.82rem, 2.5vw, 0.95rem)", color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: "480px", marginBottom: "1.5rem" }}>
               B.Tech + M.Tech in ECE at <strong style={{ color: "var(--text-primary)" }}>NIT Hamirpur</strong>. I blend UX thinking with engineering depth — from Figma prototypes to ESP32 firmware.
             </motion.p>
 
             {/* Info chips */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
-              style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+              className="hero-chips" style={{ marginBottom: "1.75rem" }}>
               {[
-                { icon: <MapPin size={11} />, label: "India" },
-                { icon: <PenTool size={11} />, label: "Figma Expert" },
-                { icon: <Cpu size={11} />, label: "IoT / ESP32" },
-                { icon: <Globe size={11} />, label: "NIT Hamirpur" },
+                { icon: <MapPin size={10} />, label: "India" },
+                { icon: <PenTool size={10} />, label: "Figma" },
+                { icon: <Cpu size={10} />, label: "IoT / ESP32" },
+                { icon: <Globe size={10} />, label: "NIT Hamirpur" },
               ].map(c => (
-                <span key={c.label} style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", padding: "0.3rem 0.7rem", borderRadius: "9999px", background: "var(--bg-secondary)", border: "1px solid var(--border)", fontFamily: "JetBrains Mono, monospace", fontSize: "0.65rem", color: "var(--text-muted)" }}>
-                  <span style={{ color: "var(--accent)" }}>{c.icon}</span>{c.label}
+                <span key={c.label} style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", padding: "0.25rem 0.6rem", borderRadius: "9999px", background: "var(--bg-secondary)", border: "1px solid var(--border)", fontFamily: "JetBrains Mono, monospace", fontSize: "0.62rem", color: "var(--text-muted)", whiteSpace: "nowrap" }}>
+                  <span style={{ color: "var(--accent)", flexShrink: 0 }}>{c.icon}</span>{c.label}
                 </span>
               ))}
             </motion.div>

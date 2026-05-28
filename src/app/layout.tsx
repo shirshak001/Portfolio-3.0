@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import CursorEffect from "@/components/ui/CursorEffect";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Loader from "@/components/ui/Loader";
+import BackgroundFX from "@/components/ui/BackgroundFX";
 
 export const metadata: Metadata = {
   title: "Shirshak Mondal — UI/UX Designer & Developer",
@@ -21,11 +22,25 @@ export const metadata: Metadata = {
     "Shirshak Mondal",
   ],
   authors: [{ name: "Shirshak Mondal" }],
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Shirshak Mondal — UI/UX Designer & Developer",
     description:
       "Building digital experiences that feel alive. Explore my work in UI/UX, IoT, and full-stack development.",
     type: "website",
+    url: "https://shirshak-portfolio.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shirshak Mondal — UI/UX Designer & Developer",
+    description: "Building digital experiences that feel alive.",
   },
 };
 
@@ -35,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -49,12 +64,13 @@ export default function RootLayout({
         />
       </head>
       <body className="noise-overlay">
+        <BackgroundFX />
         <Loader />
         <SmoothScroll />
         <CursorEffect />
         <ScrollProgress />
         <Navbar />
-        <main>{children}</main>
+        <main style={{ position: "relative", zIndex: 1 }}>{children}</main>
         <Footer />
       </body>
     </html>
